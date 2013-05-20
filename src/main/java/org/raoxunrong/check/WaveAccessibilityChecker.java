@@ -24,6 +24,7 @@ public class WaveAccessibilityChecker implements AccessibilityChecker {
 
         StringBuffer stringBuffer = new StringBuffer();
         for (WebElement webElement : elements) {
+            stringBuffer.append(webElement.getAttribute("targetelement") + ": ");
             stringBuffer.append(webElement.getAttribute("alt") + "\n");
         }
 
