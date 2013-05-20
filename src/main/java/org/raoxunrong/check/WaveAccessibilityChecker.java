@@ -3,14 +3,14 @@ package org.raoxunrong.check;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.raoxunrong.domain.item.PlainTextItem;
 import org.raoxunrong.domain.page.CheckablePage;
-import org.raoxunrong.utils.AccessibilityStatistic;
 
 import java.util.List;
 
+import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
+
 public class WaveAccessibilityChecker implements AccessibilityChecker {
-
-
 
     @Override
     public void doCheck(CheckablePage page) {
@@ -22,13 +22,12 @@ public class WaveAccessibilityChecker implements AccessibilityChecker {
     private void handleAccessibilityInfo(CheckablePage page) {
         List<WebElement> elements = page.getWebDriver().findElements(By.xpath("//*[@class='wave4tip' and starts-with(@alt, 'ERROR:')]"));
 
-        for (WebElement webElement: elements) {
-            System.out.println(webElement.getTagName());
-            System.out.println(webElement.getAttribute("alt"));
+        StringBuffer stringBuffer = new StringBuffer();
+        for (WebElement webElement : elements) {
+            stringBuffer.append(webElement.getAttribute("alt") + "\n");
         }
 
-        AccessibilityStatistic.addFailedItem(page.getPageName(), "");
-        System.out.println("------------" + elements.size());
+        addCheckedItem(new PlainTextItem(page.getPageName(), (elements.size() == 0), stringBuffer.toString()));
     }
 
     private void resetPage(CheckablePage page) {
