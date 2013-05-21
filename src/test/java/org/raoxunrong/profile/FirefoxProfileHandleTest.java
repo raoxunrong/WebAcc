@@ -24,11 +24,23 @@ public class FirefoxProfileHandleTest {
         verify(firefoxProfile).addExtension(eq(FirefoxProfileHandle.class), eq("/wave_toolbar-1_1_6-fx.xpi"));
     }
 
+    @Test
+    public void shouldInitSpellCheckerPlugin() throws IOException {
+        FirefoxProfile firefoxProfile = mock(FirefoxProfile.class);
+
+        FirefoxProfileHandle firefoxProfileHandle = new FirefoxProfileHandle();
+        firefoxProfileHandle.installSpellChecker(firefoxProfile);
+
+        verify(firefoxProfile).addExtension(eq(FirefoxProfileHandle.class), eq("/spell_checker_improved.xpi"));
+    }
+
 
     @Test
     public void shouldInstance() throws IOException {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
-        firefoxProfile = new FirefoxProfileHandle().installWAVE(firefoxProfile);
+        FirefoxProfileHandle firefoxProfileHandle = new FirefoxProfileHandle();
+        firefoxProfile = firefoxProfileHandle.installWAVE(firefoxProfile);
+        firefoxProfile = firefoxProfileHandle.installSpellChecker(firefoxProfile);
 
         FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxProfile);
         firefoxDriver.get("http://baidu.com");
