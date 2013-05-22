@@ -1,8 +1,9 @@
-package org.raoxunrong.check;
+package org.raoxunrong.check.firefox;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.raoxunrong.check.PageChecker;
 import org.raoxunrong.domain.item.PlainTextItem;
 import org.raoxunrong.domain.page.CheckablePage;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
 
-public class WaveAccessibilityChecker implements AccessibilityChecker {
+public class FirefoxWaveAccessibilityChecker implements PageChecker {
 
     @Override
     public void doCheck(CheckablePage page) {
@@ -24,8 +25,9 @@ public class WaveAccessibilityChecker implements AccessibilityChecker {
 
         StringBuffer stringBuffer = new StringBuffer();
         for (WebElement webElement : elements) {
-            stringBuffer.append(webElement.getAttribute("targetelement") + ": ");
-            stringBuffer.append(webElement.getAttribute("alt") + "\n");
+            stringBuffer.append(webElement.getAttribute("targetelement")).append(": ");
+            stringBuffer.append(webElement.getAttribute("alt"));
+            stringBuffer.append("\n");
         }
 
         addCheckedItem(new PlainTextItem(page.getPageName(), (elements.size() == 0), stringBuffer.toString()));

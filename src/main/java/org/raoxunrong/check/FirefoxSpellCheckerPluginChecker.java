@@ -9,14 +9,7 @@ import java.util.List;
 
 import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
 
-/**
- * Created with IntelliJ IDEA.
- * User: twer
- * Date: 5/21/13
- * Time: 1:34 PM
- * To change this template use File | Settings | File Templates.
- */
-public class SpellingCheckerFirefoxPluginChecker implements SpellingChecker {
+public class FirefoxSpellCheckerPluginChecker implements PageChecker {
 
     @Override
     public void doCheck(CheckablePage page) {

@@ -1,7 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.raoxunrong.check.SpellingCheckerFirefoxPluginChecker;
+import org.raoxunrong.check.FirefoxSpellCheckerPluginChecker;
 import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.domain.page.CheckablePage;
 import org.raoxunrong.profile.FirefoxProfileHandle;
@@ -24,7 +24,7 @@ public class SpellCheckerDemoTest {
     public static void main(String[] args) throws IOException {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         FirefoxProfileHandle firefoxProfileHandle = new FirefoxProfileHandle();
-        SpellingCheckerFirefoxPluginChecker spellingCheckerFirefoxPluginChecker = new SpellingCheckerFirefoxPluginChecker();
+        FirefoxSpellCheckerPluginChecker spellingCheckerFirefoxPluginChecker = new FirefoxSpellCheckerPluginChecker();
 
         firefoxProfile = firefoxProfileHandle.installSpellChecker(firefoxProfile);
         FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxProfile);

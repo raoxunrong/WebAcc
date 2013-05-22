@@ -1,9 +1,10 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.raoxunrong.check.WaveAccessibilityChecker;
+import org.raoxunrong.check.firefox.FirefoxWaveAccessibilityChecker;
 import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.domain.page.CheckablePage;
 import org.raoxunrong.profile.FirefoxProfileHandle;
@@ -22,7 +23,7 @@ public class DemoTest {
         FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxProfile);
         firefoxDriver.get("http://baidu.com");
 
-        WaveAccessibilityChecker waveAccessibilityChecker = new WaveAccessibilityChecker();
+        FirefoxWaveAccessibilityChecker waveAccessibilityChecker = new FirefoxWaveAccessibilityChecker();
 
         BaiduPage baiduPage = new BaiduPage(firefoxDriver);
         waveAccessibilityChecker.doCheck(baiduPage);
@@ -43,6 +44,9 @@ public class DemoTest {
             System.out.println(checkedItem.getAdditionalInfo());
             System.out.println("-------------");
         }
+
+        ChromeDriver chromeDriver = new ChromeDriver();
+        chromeDriver.get("http://www.google.com");
     }
 
 }
