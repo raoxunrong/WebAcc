@@ -1,7 +1,8 @@
-package org.raoxunrong.check;
+package org.raoxunrong.check.firefox;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.raoxunrong.check.PageChecker;
 import org.raoxunrong.domain.item.PlainTextItem;
 import org.raoxunrong.domain.page.CheckablePage;
 
@@ -13,28 +14,18 @@ public class FirefoxSpellCheckerPluginChecker implements PageChecker {
 
     @Override
     public void doCheck(CheckablePage page) {
-        doSpellCheckAction(page);
+        doSpellCheckerActionEvent(page);
         handleSpellCheckerInfo(page);
     }
 
     private void handleSpellCheckerInfo(CheckablePage page) {
-        List<WebElement> elements = page.getWebDriver().findElements(By.id("//*[@class='misspelling']"));
+        List<WebElement> elements = page.getWebDriver().findElements(By.className("misspelling"));
         StringBuffer stringBuffer = new StringBuffer();
         for (WebElement webElement : elements) {
-            stringBuffer.append(webElement.getText());
+            System.out.println(webElement.getText());
+            stringBuffer.append(webElement.getText()).append("\n");
         }
         addCheckedItem(new PlainTextItem(page.getPageName(), (elements.size() == 0), stringBuffer.toString()));
-    }
-
-    private void doSpellCheckAction(CheckablePage page) {
-        int spellCheckerIndex = 8;
-        WebElement pageOperator = page.getWebDriver().findElement(By.id(page.getPageId()));
-        Actions clickAction = new Actions(page.getWebDriver());
-        clickAction.contextClick(pageOperator).perform();
-        for(int i = 0; i < spellCheckerIndex; i++){
-            clickAction.contextClick(pageOperator).sendKeys(Keys.DOWN).perform();
-        }
-        clickAction.sendKeys(Keys.RETURN).perform();
     }
 
     private void doSpellCheckerActionEvent(CheckablePage page){

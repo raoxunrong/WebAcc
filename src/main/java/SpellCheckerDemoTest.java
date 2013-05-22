@@ -1,7 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.raoxunrong.check.FirefoxSpellCheckerPluginChecker;
+import org.raoxunrong.check.firefox.FirefoxSpellCheckerPluginChecker;
 import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.domain.page.CheckablePage;
 import org.raoxunrong.profile.FirefoxProfileHandle;
@@ -28,7 +28,7 @@ public class SpellCheckerDemoTest {
 
         firefoxProfile = firefoxProfileHandle.installSpellChecker(firefoxProfile);
         FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxProfile);
-        firefoxDriver.get("http://www.google.com.hk");
+        firefoxDriver.get("http://www.baidu.com/");
 
         GooglePage googlePage = new GooglePage(firefoxDriver);
         spellingCheckerFirefoxPluginChecker.doCheck(googlePage);
@@ -55,7 +55,7 @@ class GooglePage implements CheckablePage {
 
     @Override
     public String getPageId() {
-        return "gsr";  //To change body of implemented methods use File | Settings | File Templates.
+        return "wrapper";  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
