@@ -45,8 +45,6 @@ public class DemoTest {
             System.out.println("-------------");
         }
 
-        ChromeDriver chromeDriver = new ChromeDriver();
-        chromeDriver.get("http://www.google.com");
     }
 
 }
