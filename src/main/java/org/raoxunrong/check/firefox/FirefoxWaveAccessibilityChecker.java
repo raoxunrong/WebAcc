@@ -9,6 +9,7 @@ import org.raoxunrong.domain.page.CheckablePage;
 
 import java.util.List;
 
+import static org.raoxunrong.check.JavascriptGenerator.generateDispatchEventScript;
 import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
 
 public class FirefoxWaveAccessibilityChecker implements PageChecker {
@@ -42,20 +43,11 @@ public class FirefoxWaveAccessibilityChecker implements PageChecker {
     }
 
     private String withResetScript(String pageId) {
-        return withDefaultScript(pageId, "ResetEvent");
+        return generateDispatchEventScript(pageId, "ResetEvent");
     }
 
     private String withCheckScript(String pageId) {
-        return withDefaultScript(pageId, "CheckAccessibilityEvent");
-    }
-
-    private String withDefaultScript(String pageId, final String event) {
-        final String createEvent = "var evt = document.createEvent(\"Events\");";
-        final String initEvent = "evt.initEvent(\"" + event + "\", true, false);";
-        final String findElement = "var element = document.getElementById(\"" + pageId + "\");";
-        final String dispatchEvent = "element.dispatchEvent(evt);";
-        StringBuffer scriptString = new StringBuffer().append(createEvent).append(initEvent).append(findElement).append(dispatchEvent);
-        return scriptString.toString();
+        return generateDispatchEventScript(pageId, "CheckAccessibilityEvent");
     }
 
 }
