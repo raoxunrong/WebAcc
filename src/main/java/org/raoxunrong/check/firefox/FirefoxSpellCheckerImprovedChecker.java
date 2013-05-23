@@ -12,7 +12,7 @@ import java.util.List;
 import static org.raoxunrong.check.JavascriptGenerator.generateDispatchEventScript;
 import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
 
-public class FirefoxSpellCheckerPluginChecker implements PageChecker {
+public class FirefoxSpellCheckerImprovedChecker implements PageChecker {
 
     @Override
     public void doCheck(CheckablePage page) {

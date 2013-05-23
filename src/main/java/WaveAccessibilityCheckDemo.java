@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class DemoTest {
+public class WaveAccessibilityCheckDemo {
 
     public static void main(String[] args) throws IOException {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
