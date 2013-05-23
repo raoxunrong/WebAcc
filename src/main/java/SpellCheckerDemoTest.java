@@ -28,7 +28,7 @@ public class SpellCheckerDemoTest {
 
         firefoxProfile = firefoxProfileHandle.installSpellChecker(firefoxProfile);
         FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxProfile);
-        firefoxDriver.get("http://www.baidu.com/");
+        firefoxDriver.get("https://duckduckgo.com/");
 
         GooglePage googlePage = new GooglePage(firefoxDriver);
         spellingCheckerFirefoxPluginChecker.doCheck(googlePage);
@@ -55,7 +55,7 @@ class GooglePage implements CheckablePage {
 
     @Override
     public String getPageId() {
-        return "wrapper";  //To change body of implemented methods use File | Settings | File Templates.
+        return "content_wrapper_homepage";  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

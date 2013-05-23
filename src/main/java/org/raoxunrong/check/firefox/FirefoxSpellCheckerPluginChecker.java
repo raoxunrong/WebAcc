@@ -23,8 +23,13 @@ public class FirefoxSpellCheckerPluginChecker implements PageChecker {
     private void handleSpellCheckerInfo(CheckablePage page) {
         List<WebElement> elements = page.getWebDriver().findElements(By.className("misspelling"));
         StringBuffer stringBuffer = new StringBuffer();
+        String errorWord;
         for (WebElement webElement : elements) {
-            stringBuffer.append(webElement.getText()).append("\n");
+            errorWord = webElement.getText();
+            if(errorWord.isEmpty() && !webElement.getAttribute("innerHTML").isEmpty()){
+                errorWord = webElement.getAttribute("innerHTML");
+            }
+            stringBuffer.append(errorWord).append("\n");
         }
         addCheckedItem(new PlainTextItem(page.getPageName(), (elements.size() == 0), stringBuffer.toString()));
     }
