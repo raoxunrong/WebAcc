@@ -1,10 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.raoxunrong.check.firefox.FirefoxWaveAccessibilityChecker;
+import org.raoxunrong.check.accessibility.firefox.FirefoxWaveAccessibilityChecker;
 import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.domain.page.CheckablePage;
 import org.raoxunrong.profile.FirefoxProfileHandle;

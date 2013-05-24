@@ -1,9 +1,7 @@
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.raoxunrong.check.firefox.FirefoxSpellCheckerImprovedChecker;
+import org.raoxunrong.check.spellcheck.firefox.FirefoxSpellCheckerImprovedChecker;
 import org.raoxunrong.domain.item.CheckedItem;
-import org.raoxunrong.domain.page.CheckablePage;
 import org.raoxunrong.profile.FirefoxProfileHandle;
 import org.raoxunrong.utils.CheckedItemStatistic;
 
@@ -22,8 +20,8 @@ public class SpellCheckerImprovedDemo {
         FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxProfile);
         firefoxDriver.get("http://baidu.com/");
 
-        BaiduPage googlePage = new BaiduPage(firefoxDriver);
-        spellingCheckerFirefoxPluginChecker.doCheck(googlePage);
+        BaiduPage baiduPage = new BaiduPage(firefoxDriver);
+        spellingCheckerFirefoxPluginChecker.doCheck(baiduPage);
 
         Collection<CheckedItem> statisticInfo = CheckedItemStatistic.getStatisticInfo();
         Iterator<CheckedItem> iterator = statisticInfo.iterator();

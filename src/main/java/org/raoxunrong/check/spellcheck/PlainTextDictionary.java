@@ -1,8 +1,9 @@
-package org.raoxunrong.check;
+package org.raoxunrong.check.spellcheck;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import org.apache.commons.exec.util.StringUtils;
+import org.raoxunrong.check.spellcheck.CustomisedDictionary;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class PlainTextDictionary implements CustomisedDictionary{
+public class PlainTextDictionary implements CustomisedDictionary {
 
     private String rawString;
     private HashSet<String> words;
@@ -23,11 +24,6 @@ public class PlainTextDictionary implements CustomisedDictionary{
 
     public PlainTextDictionary(String filePath, String separatorChars){
         initWords(filePath, separatorChars);
-    }
-
-    @Override
-    public HashSet<String> getWords() {
-        return this.words;
     }
 
     private void initWords(String filePath, String separatorChars){
@@ -83,4 +79,13 @@ public class PlainTextDictionary implements CustomisedDictionary{
     }
 
 
+    @Override
+    public boolean isWord(String word) {
+        return words.contains(word);
+    }
+
+    @Override
+    public void addNewWord(String word) {
+        this.words.add(word);
+    }
 }

@@ -1,4 +1,4 @@
-package org.raoxunrong.check.firefox;
+package org.raoxunrong.check.accessibility.firefox;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
