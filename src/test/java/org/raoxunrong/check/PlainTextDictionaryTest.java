@@ -14,8 +14,7 @@ public class PlainTextDictionaryTest {
     @Test
     public void shouldInitPlainTextDictionaryByResourceName() throws IOException {
         PlainTextDictionary plainTextDictionary = new PlainTextDictionary(PLAINTEXT_DIC_RESOURCE_NAME);
-        String[] words = new String[]{"google", "baidu", "tw"};
-        for(String word: words){
+        for(String word: getAdditionalWords()){
             assertTrue(plainTextDictionary.isWord(word));
         }
     }
@@ -23,8 +22,7 @@ public class PlainTextDictionaryTest {
     @Test
     public void shouldInitPlainTextDictionaryByResourceNameAndSeparator() throws IOException {
         PlainTextDictionary plainTextDictionary = new PlainTextDictionary(PLAINTEXT_DIC_RESOURCE_NAME, "\n");
-        String[] words = new String[]{"google", "baidu", "tw"};
-        for(String word: words){
+        for(String word: getAdditionalWords()){
             assertTrue(plainTextDictionary.isWord(word));
         }
     }
@@ -33,8 +31,7 @@ public class PlainTextDictionaryTest {
     public void shouldInitPlainTextDictionaryByFilePath() throws IOException {
         String filePath = this.getClass().getClassLoader().getResource(PLAINTEXT_DIC_RESOURCE_NAME).getFile();
         PlainTextDictionary plainTextDictionary = new PlainTextDictionary(filePath);
-        String[] words = new String[]{"google", "baidu", "tw"};
-        for(String word: words){
+        for(String word: getAdditionalWords()){
             assertTrue(plainTextDictionary.isWord(word));
         }
     }
@@ -43,8 +40,7 @@ public class PlainTextDictionaryTest {
     public void shouldInitPlainTextDictionaryByFilePathAndSeparator() throws IOException {
         String filePath = this.getClass().getClassLoader().getResource(PLAINTEXT_DIC_RESOURCE_NAME).getFile();
         PlainTextDictionary plainTextDictionary = new PlainTextDictionary(filePath, "\n");
-        String[] words = new String[]{"google", "baidu", "tw"};
-        for(String word: words){
+        for(String word: getAdditionalWords()){
             assertTrue(plainTextDictionary.isWord(word));
         }
     }
@@ -71,6 +67,10 @@ public class PlainTextDictionaryTest {
     @Test(expected = IOException.class)
     public void shouldGetExceptionWhenResourceIsEmpty() throws IOException {
         new PlainTextDictionary("");
+    }
+
+    private String[] getAdditionalWords() {
+        return new String[]{"google", "baidu", "tw"};
     }
 }
 
