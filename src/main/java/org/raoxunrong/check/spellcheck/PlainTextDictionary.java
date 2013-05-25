@@ -74,7 +74,7 @@ public class PlainTextDictionary implements CustomisedDictionary {
     }
 
     private URL getFileURLByResourceName(String resourceName){
-        URL resourceFileURL = this.getClass().getClassLoader().getResource(resourceName);
+        URL resourceFileURL = Thread.currentThread().getContextClassLoader().getResource(resourceName);
         return resourceFileURL;
     }
 
