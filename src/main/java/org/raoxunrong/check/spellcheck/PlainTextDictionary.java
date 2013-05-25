@@ -6,8 +6,10 @@ import org.apache.commons.exec.util.StringUtils;
 import org.raoxunrong.check.spellcheck.CustomisedDictionary;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,64 +20,64 @@ public class PlainTextDictionary implements CustomisedDictionary {
     private String rawString;
     private HashSet<String> words;
 
-    public PlainTextDictionary(String filePath){
+    public PlainTextDictionary(String filePath) throws IOException {
         this(filePath, "\n");
     }
 
-    public PlainTextDictionary(String filePath, String separatorChars){
+    public PlainTextDictionary(String filePath, String separatorChars) throws IOException {
         initWords(filePath, separatorChars);
     }
 
-    private void initWords(String filePath, String separatorChars){
+    private void initWords(String filePath, String separatorChars) throws IOException {
         this.rawString = getStringFromFile(filePath);
         this.words = getHashSetFromString(rawString, separatorChars);
     }
 
-    private HashSet<String> getHashSetFromString(String rawString, String separatorChars){
+    private HashSet<String> getHashSetFromString(String rawString, String separatorChars) {
         HashSet<String> wordHashSet = new HashSet<String>();
         List<String> wordList = Arrays.asList(StringUtils.split(rawString, separatorChars));
-        for(String word: wordList){
-           wordHashSet.add(word.trim());
+        for (String word : wordList) {
+            wordHashSet.add(word.trim());
         }
         return wordHashSet;
     }
 
-    private String getStringFromFile(String fileNameOrPath){
+    private String getStringFromFile(String fileNameOrPath) throws IOException {
         URL url = getURL(fileNameOrPath);
-        String textToString = null;
-        try {
-            textToString = Resources.toString(url, Charsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(!isURLValid(url)) {
+            throw new FileNotFoundException(fileNameOrPath + " is not exist");
         }
-        return textToString;
+        return Resources.toString(url, Charsets.UTF_8);
     }
 
-    private URL getURL(String nameOrPath){
+    private boolean isURLValid(URL url) {
+        boolean valid = false;
+        if (url != null) {
+            try {
+                File file = new File(url.toURI());
+                if (file.exists() && file.isFile()) {
+                    valid = true;
+                }
+            } catch (URISyntaxException e) {
+                //nothing to do, just return valid is false
+            }
+        }
+
+        return valid;
+    }
+
+    private URL getURL(String nameOrPath) throws MalformedURLException {
         File file = new File(nameOrPath);
-        URL fileURL = null;
-        if(file.exists()){
-            fileURL = getFileURLByPath(nameOrPath);
-        } else {
-            fileURL = getFileURLByResourceName(nameOrPath);
-        }
-        return fileURL;
+        return ((file.exists()) ? getFileURLByPath(nameOrPath) : getFileURLByResourceName(nameOrPath));
     }
 
-    private URL getFileURLByPath(String filePath){
+    private URL getFileURLByPath(String filePath) throws MalformedURLException {
         File file = new File(filePath);
-        URL fileURL = null;
-        try {
-            fileURL = file.toURI().toURL();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return fileURL;
+        return file.toURI().toURL();
     }
 
-    private URL getFileURLByResourceName(String resourceName){
-        URL resourceFileURL = Thread.currentThread().getContextClassLoader().getResource(resourceName);
-        return resourceFileURL;
+    private URL getFileURLByResourceName(String resourceName) {
+        return Thread.currentThread().getContextClassLoader().getResource(resourceName);
     }
 
 
