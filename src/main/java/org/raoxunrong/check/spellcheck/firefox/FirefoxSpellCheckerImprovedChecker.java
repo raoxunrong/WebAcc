@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.raoxunrong.check.PageChecker;
+import org.raoxunrong.check.spellcheck.CustomisedDictionary;
 import org.raoxunrong.domain.item.PlainTextItem;
 import org.raoxunrong.domain.page.CheckablePage;
 
@@ -13,6 +14,15 @@ import static org.raoxunrong.check.JavascriptGenerator.generateDispatchEventScri
 import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
 
 public class FirefoxSpellCheckerImprovedChecker implements PageChecker {
+
+    private CustomisedDictionary customisedDictionary;
+
+    public FirefoxSpellCheckerImprovedChecker() {
+    }
+
+    public FirefoxSpellCheckerImprovedChecker(CustomisedDictionary customisedDictionary) {
+        this.customisedDictionary = customisedDictionary;
+    }
 
     @Override
     public void doCheck(CheckablePage page) {
@@ -25,13 +35,25 @@ public class FirefoxSpellCheckerImprovedChecker implements PageChecker {
         StringBuffer stringBuffer = new StringBuffer();
         String errorWord;
         for (WebElement webElement : elements) {
-            errorWord = webElement.getText();
-            if(errorWord.isEmpty() && !webElement.getAttribute("innerHTML").isEmpty()){
-                errorWord = webElement.getAttribute("innerHTML");
+            errorWord = extractWordFromElement(webElement);
+            if (!isCustomisedWord(errorWord)) {
+                stringBuffer.append(errorWord).append("\n");
             }
-            stringBuffer.append(errorWord).append("\n");
         }
-        addCheckedItem(new PlainTextItem(page.getPageName(), (elements.size() == 0), stringBuffer.toString()));
+        String errorSpellWords = stringBuffer.toString();
+        addCheckedItem(new PlainTextItem(page.getPageName(), (errorSpellWords.length() == 0), errorSpellWords));
+    }
+
+    private String extractWordFromElement(WebElement webElement) {
+        String errorWord = webElement.getText().trim();
+        if (errorWord.isEmpty() && !webElement.getAttribute("innerHTML").isEmpty()) {
+            errorWord = webElement.getAttribute("innerHTML");
+        }
+        return errorWord;
+    }
+
+    private boolean isCustomisedWord(String errorWord) {
+        return (customisedDictionary != null) ? customisedDictionary.isWord(errorWord) : false;
     }
 
     private void doSpellCheckerActionEvent(CheckablePage page) {
