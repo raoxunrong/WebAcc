@@ -4,5 +4,5 @@ import org.raoxunrong.domain.page.CheckablePage;
 
 public interface PageChecker {
 
-    public void doCheck(CheckablePage page);
+    public void doCheck(CheckablePage page) throws Exception;
 }

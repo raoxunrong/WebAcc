@@ -1,9 +1,8 @@
-package org.raoxunrong.check.spellcheck;
+package org.raoxunrong.check.spellcheck.dic;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import org.apache.commons.exec.util.StringUtils;
-import org.raoxunrong.check.spellcheck.CustomisedDictionary;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,16 +14,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class PlainTextDictionary implements CustomisedDictionary {
+public class PlainTextFileDictionary implements CustomisedDictionary {
 
     private String rawString;
     private HashSet<String> words;
 
-    public PlainTextDictionary(String filePath) throws IOException {
+    public PlainTextFileDictionary(String filePath) throws IOException {
         this(filePath, "\n");
     }
 
-    public PlainTextDictionary(String filePath, String separatorChars) throws IOException {
+    public PlainTextFileDictionary(String filePath, String separatorChars) throws IOException {
         initWords(filePath, separatorChars);
     }
 

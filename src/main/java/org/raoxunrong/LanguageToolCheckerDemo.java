@@ -3,7 +3,7 @@ package org.raoxunrong;
 import org.languagetool.language.AustralianEnglish;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.raoxunrong.check.spellcheck.languagetool.LanguageToolChecker;
+import org.raoxunrong.check.spellcheck.common.LanguageToolChecker;
 import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.domain.page.CheckablePage;
 import org.raoxunrong.utils.CheckedItemStatistic;

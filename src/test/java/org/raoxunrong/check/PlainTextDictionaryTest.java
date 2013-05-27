@@ -1,7 +1,7 @@
 package org.raoxunrong.check;
 
 import org.junit.Test;
-import org.raoxunrong.check.spellcheck.PlainTextDictionary;
+import org.raoxunrong.check.spellcheck.dic.PlainTextFileDictionary;
 
 import java.io.IOException;
 
@@ -13,60 +13,60 @@ public class PlainTextDictionaryTest {
 
     @Test
     public void shouldInitPlainTextDictionaryByResourceName() throws IOException {
-        PlainTextDictionary plainTextDictionary = new PlainTextDictionary(PLAINTEXT_DIC_RESOURCE_NAME);
+        PlainTextFileDictionary plainTextFileDictionary = new PlainTextFileDictionary(PLAINTEXT_DIC_RESOURCE_NAME);
         for(String word: getAdditionalWords()){
-            assertTrue(plainTextDictionary.isWord(word));
+            assertTrue(plainTextFileDictionary.isWord(word));
         }
     }
 
     @Test
     public void shouldInitPlainTextDictionaryByResourceNameAndSeparator() throws IOException {
-        PlainTextDictionary plainTextDictionary = new PlainTextDictionary(PLAINTEXT_DIC_RESOURCE_NAME, "\n");
+        PlainTextFileDictionary plainTextFileDictionary = new PlainTextFileDictionary(PLAINTEXT_DIC_RESOURCE_NAME, "\n");
         for(String word: getAdditionalWords()){
-            assertTrue(plainTextDictionary.isWord(word));
+            assertTrue(plainTextFileDictionary.isWord(word));
         }
     }
 
     @Test
     public void shouldInitPlainTextDictionaryByFilePath() throws IOException {
         String filePath = this.getClass().getClassLoader().getResource(PLAINTEXT_DIC_RESOURCE_NAME).getFile();
-        PlainTextDictionary plainTextDictionary = new PlainTextDictionary(filePath);
+        PlainTextFileDictionary plainTextFileDictionary = new PlainTextFileDictionary(filePath);
         for(String word: getAdditionalWords()){
-            assertTrue(plainTextDictionary.isWord(word));
+            assertTrue(plainTextFileDictionary.isWord(word));
         }
     }
 
     @Test
     public void shouldInitPlainTextDictionaryByFilePathAndSeparator() throws IOException {
         String filePath = this.getClass().getClassLoader().getResource(PLAINTEXT_DIC_RESOURCE_NAME).getFile();
-        PlainTextDictionary plainTextDictionary = new PlainTextDictionary(filePath, "\n");
+        PlainTextFileDictionary plainTextFileDictionary = new PlainTextFileDictionary(filePath, "\n");
         for(String word: getAdditionalWords()){
-            assertTrue(plainTextDictionary.isWord(word));
+            assertTrue(plainTextFileDictionary.isWord(word));
         }
     }
 
     @Test
     public void shouldAddNewWord() throws IOException {
-        PlainTextDictionary plainTextDictionary = new PlainTextDictionary(PLAINTEXT_DIC_RESOURCE_NAME);
+        PlainTextFileDictionary plainTextFileDictionary = new PlainTextFileDictionary(PLAINTEXT_DIC_RESOURCE_NAME);
         String[] words = new String[]{"new", "nothing"};
         for(String word: words){
-            assertFalse(plainTextDictionary.isWord(word));
-            plainTextDictionary.addNewWord(word);
+            assertFalse(plainTextFileDictionary.isWord(word));
+            plainTextFileDictionary.addNewWord(word);
         }
 
         for(String word: words){
-            assertTrue(plainTextDictionary.isWord(word));
+            assertTrue(plainTextFileDictionary.isWord(word));
         }
     }
 
     @Test(expected = IOException.class)
     public void shouldGetExceptionWhenResourceNotExist() throws IOException {
-        new PlainTextDictionary("/notExist");
+        new PlainTextFileDictionary("/notExist");
     }
 
     @Test(expected = IOException.class)
     public void shouldGetExceptionWhenResourceIsEmpty() throws IOException {
-        new PlainTextDictionary("");
+        new PlainTextFileDictionary("");
     }
 
     private String[] getAdditionalWords() {
