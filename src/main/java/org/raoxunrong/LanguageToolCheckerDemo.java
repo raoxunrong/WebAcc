@@ -1,5 +1,6 @@
 package org.raoxunrong;
 
+import org.languagetool.language.AustralianEnglish;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.raoxunrong.check.spellcheck.languagetool.LanguageToolChecker;
@@ -14,7 +15,7 @@ public class LanguageToolCheckerDemo {
 
     public static void main(String args[]){
         WebDriver webDriver = new FirefoxDriver();
-        LanguageToolChecker languageToolChecker = new LanguageToolChecker();
+        LanguageToolChecker languageToolChecker = new LanguageToolChecker(new AustralianEnglish());
         webDriver.get("http://www.duckduckgo.com");
         DuckPage page = new DuckPage(webDriver);
         languageToolChecker.doCheck(page);

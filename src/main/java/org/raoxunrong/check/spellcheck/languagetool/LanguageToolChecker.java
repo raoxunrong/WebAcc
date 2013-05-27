@@ -2,9 +2,11 @@ package org.raoxunrong.check.spellcheck.languagetool;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.AustralianEnglish;
+import org.languagetool.language.English;
 import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.raoxunrong.check.PageChecker;
+import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.domain.item.PlainTextItem;
 import org.raoxunrong.domain.page.CheckablePage;
 import org.raoxunrong.utils.HTMLTextLoader;
@@ -13,6 +15,12 @@ import java.util.List;
 import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
 
 public class LanguageToolChecker implements PageChecker{
+
+    private English english;
+
+    public LanguageToolChecker(English english) {
+        this.english = english;
+    }
 
     @Override
     public void doCheck(CheckablePage page) {
@@ -27,7 +35,7 @@ public class LanguageToolChecker implements PageChecker{
         String htmlSource = page.getWebDriver().getPageSource();
         String texts = HTMLTextLoader.getText(htmlSource);
         StringBuffer stringBuffer = new StringBuffer();
-        JLanguageTool langTool = new JLanguageTool(new AustralianEnglish());
+        JLanguageTool langTool = new JLanguageTool(english);
         for (Rule rule : langTool.getAllRules()) {
             if (!rule.isSpellingRule()) {
                 langTool.disableRule(rule.getId());
@@ -40,12 +48,6 @@ public class LanguageToolChecker implements PageChecker{
             if(!error.isEmpty()){
                 stringBuffer.append(error).append("\n");
             }
-//            System.out.println("Potential error at " +
-//                    match.getLine() + ", " + match.getColumn() + " to " + match.getEndLine() + ", " + match.getEndColumn() +
-//                    ": " + error);
-//            System.out.println(match.getMessage());
-//            System.out.println("Suggested correction: " +
-//                    match.getSuggestedReplacements());
         }
         String errorSpellWords = stringBuffer.toString();
         addCheckedItem(new PlainTextItem(page.getPageName(), (errorSpellWords.length() == 0), errorSpellWords));
