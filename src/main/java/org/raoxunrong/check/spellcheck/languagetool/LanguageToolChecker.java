@@ -2,6 +2,7 @@ package org.raoxunrong.check.spellcheck.languagetool;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.AustralianEnglish;
+import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.raoxunrong.check.PageChecker;
 import org.raoxunrong.domain.item.PlainTextItem;
@@ -27,6 +28,11 @@ public class LanguageToolChecker implements PageChecker{
         String texts = HTMLTextLoader.getText(htmlSource);
         StringBuffer stringBuffer = new StringBuffer();
         JLanguageTool langTool = new JLanguageTool(new AustralianEnglish());
+        for (Rule rule : langTool.getAllRules()) {
+            if (!rule.isSpellingRule()) {
+                langTool.disableRule(rule.getId());
+            }
+        }
         String error;
         List<RuleMatch> matches = langTool.check(texts);
         for (RuleMatch match : matches) {
