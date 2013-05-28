@@ -5,6 +5,7 @@ import com.google.common.io.Resources;
 import org.antlr.stringtemplate.StringTemplate;
 import org.apache.commons.io.FileUtils;
 import org.raoxunrong.check.CheckType;
+import org.raoxunrong.check.PageChecker;
 import org.raoxunrong.domain.item.CheckedItem;
 
 import java.io.File;
@@ -53,7 +54,7 @@ public final class CheckedItemStatistic {
     }
 
     private static String getCheckReportPlainText() throws IOException {
-        URL reportTemplateURL = Thread.currentThread().getContextClassLoader().getResource(CheckReportTemplate);
+        URL reportTemplateURL = PageChecker.class.getClassLoader().getResource(CheckReportTemplate);
         return Resources.toString(reportTemplateURL, Charsets.UTF_8);
     }
 
