@@ -1,5 +1,3 @@
-package org.raoxunrong;
-
 import org.languagetool.language.AustralianEnglish;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -8,13 +6,12 @@ import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.domain.page.CheckablePage;
 import org.raoxunrong.utils.CheckedItemStatistic;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 
 public class LanguageToolCheckerDemo {
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws Exception {
         WebDriver webDriver = new FirefoxDriver();
         LanguageToolChecker languageToolChecker = new LanguageToolChecker(new AustralianEnglish());
         webDriver.get("http://www.duckduckgo.com");

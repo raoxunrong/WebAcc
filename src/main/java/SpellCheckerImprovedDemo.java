@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 public class SpellCheckerImprovedDemo {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         FirefoxProfileHandle firefoxProfileHandle = new FirefoxProfileHandle();
         FirefoxSpellCheckerImprovedChecker spellingCheckerFirefoxPluginChecker = new FirefoxSpellCheckerImprovedChecker();
