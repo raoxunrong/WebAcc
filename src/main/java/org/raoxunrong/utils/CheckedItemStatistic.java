@@ -53,7 +53,7 @@ public final class CheckedItemStatistic {
     }
 
     private static String getCheckReportPlainText() throws IOException {
-        URL reportTemplateURL = CheckedItemStatistic.class.getResource(CheckReportTemplate);
+        URL reportTemplateURL = Thread.currentThread().getContextClassLoader().getResource(CheckReportTemplate);
         return Resources.toString(reportTemplateURL, Charsets.UTF_8);
     }
 

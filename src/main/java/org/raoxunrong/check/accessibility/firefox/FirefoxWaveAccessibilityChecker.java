@@ -27,8 +27,8 @@ public class FirefoxWaveAccessibilityChecker implements PageChecker {
 
         StringBuffer stringBuffer = new StringBuffer();
         for (WebElement webElement : elements) {
-            stringBuffer.append(webElement.getAttribute("targetelement")).append(": ");
-            stringBuffer.append(webElement.getAttribute("alt"));
+            stringBuffer.append(webElement.getAttribute("targetelement").trim()).append(": ");
+            stringBuffer.append(webElement.getAttribute("alt").trim());
             stringBuffer.append("\n");
         }
 
