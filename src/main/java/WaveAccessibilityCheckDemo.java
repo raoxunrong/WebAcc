@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 
+import static org.raoxunrong.check.CheckType.AccessibilityCheck;
+import static org.raoxunrong.check.CheckType.SpellingCheck;
+
 public class WaveAccessibilityCheckDemo {
 
     public static void main(String[] args) throws IOException {
@@ -35,7 +38,7 @@ public class WaveAccessibilityCheckDemo {
         waveAccessibilityChecker.doCheck(baiduResultPage);
 
 
-        Collection<CheckedItem> statisticInfo = CheckedItemStatistic.getStatisticInfo();
+        Collection<CheckedItem> statisticInfo = CheckedItemStatistic.getStatisticInfo(AccessibilityCheck);
         Iterator<CheckedItem> iterator = statisticInfo.iterator();
         while(iterator.hasNext()){
             CheckedItem checkedItem = iterator.next();
@@ -43,6 +46,8 @@ public class WaveAccessibilityCheckDemo {
             System.out.println(checkedItem.getAdditionalInfo());
             System.out.println("-------------");
         }
+
+        CheckedItemStatistic.generateReport("/Users/twer", AccessibilityCheck);
 
     }
 

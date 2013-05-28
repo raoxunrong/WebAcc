@@ -1,5 +1,6 @@
 package org.raoxunrong.check.spellcheck;
 
+import org.raoxunrong.check.CheckType;
 import org.raoxunrong.check.PageChecker;
 import org.raoxunrong.check.spellcheck.dic.CustomisedDictionary;
 import org.raoxunrong.domain.item.PlainTextItem;
@@ -8,6 +9,7 @@ import org.raoxunrong.domain.page.CheckablePage;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.raoxunrong.check.CheckType.SpellingCheck;
 import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
 
 public abstract class PageSpellChecker implements PageChecker {
@@ -22,7 +24,7 @@ public abstract class PageSpellChecker implements PageChecker {
         for (String wrongWord : wrongWords) {
             errorSpellWords.append(wrongWord).append("\n");
         }
-        addCheckedItem(new PlainTextItem(page.getPageName(), (errorSpellWords.length() == 0), errorSpellWords.toString()));
+        addCheckedItem(new PlainTextItem(page.getPageName(), (errorSpellWords.length() == 0), errorSpellWords.toString(), SpellingCheck));
     }
 
     protected List<String> filterCustomisedWords(List<String> sourceWrongWords) {

@@ -1,5 +1,7 @@
 package org.raoxunrong.domain.item;
 
+import org.raoxunrong.check.CheckType;
+
 public class CheckedItem<T> {
 
     private String itemName;
@@ -8,10 +10,17 @@ public class CheckedItem<T> {
 
     private T additionalInfo;
 
-    public CheckedItem(String itemName, boolean pass, T additionalInfo) {
+    public CheckType getCheckType() {
+        return checkType;
+    }
+
+    private CheckType checkType;
+
+    public CheckedItem(String itemName, boolean pass, T additionalInfo, CheckType checkType) {
         this.itemName = itemName;
         this.pass = pass;
         this.additionalInfo = additionalInfo;
+        this.checkType = checkType;
     }
 
     public T getAdditionalInfo() {

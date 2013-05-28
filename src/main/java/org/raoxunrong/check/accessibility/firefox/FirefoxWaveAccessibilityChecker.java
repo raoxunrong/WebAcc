@@ -9,6 +9,7 @@ import org.raoxunrong.domain.page.CheckablePage;
 
 import java.util.List;
 
+import static org.raoxunrong.check.CheckType.AccessibilityCheck;
 import static org.raoxunrong.check.JavascriptGenerator.generateDispatchEventScript;
 import static org.raoxunrong.utils.CheckedItemStatistic.addCheckedItem;
 
@@ -31,7 +32,7 @@ public class FirefoxWaveAccessibilityChecker implements PageChecker {
             stringBuffer.append("\n");
         }
 
-        addCheckedItem(new PlainTextItem(page.getPageName(), (elements.size() == 0), stringBuffer.toString()));
+        addCheckedItem(new PlainTextItem(page.getPageName(), (elements.size() == 0), stringBuffer.toString(), AccessibilityCheck));
     }
 
     private void resetPage(CheckablePage page) {

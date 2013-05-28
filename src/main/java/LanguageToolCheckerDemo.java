@@ -9,6 +9,8 @@ import org.raoxunrong.utils.CheckedItemStatistic;
 import java.util.Collection;
 import java.util.Iterator;
 
+import static org.raoxunrong.check.CheckType.SpellingCheck;
+
 public class LanguageToolCheckerDemo {
 
     public static void main(String args[]) throws Exception {
@@ -18,7 +20,7 @@ public class LanguageToolCheckerDemo {
         DuckPage page = new DuckPage(webDriver);
         languageToolChecker.doCheck(page);
 
-        Collection<CheckedItem> statisticInfo = CheckedItemStatistic.getStatisticInfo();
+        Collection<CheckedItem> statisticInfo = CheckedItemStatistic.getStatisticInfo(SpellingCheck);
         Iterator<CheckedItem> iterator = statisticInfo.iterator();
         while(iterator.hasNext()){
             CheckedItem checkedItem = iterator.next();
@@ -26,6 +28,8 @@ public class LanguageToolCheckerDemo {
             System.out.println(checkedItem.getAdditionalInfo());
             System.out.println("-------------");
         }
+
+        CheckedItemStatistic.generateReport("/Users/twer", SpellingCheck);
     }
 }
 

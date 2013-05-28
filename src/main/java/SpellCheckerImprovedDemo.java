@@ -1,13 +1,15 @@
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.raoxunrong.check.CheckType;
 import org.raoxunrong.check.spellcheck.firefox.FirefoxSpellCheckerImprovedChecker;
 import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.profile.FirefoxProfileHandle;
 import org.raoxunrong.utils.CheckedItemStatistic;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+
+import static org.raoxunrong.check.CheckType.SpellingCheck;
 
 public class SpellCheckerImprovedDemo {
 
@@ -23,7 +25,7 @@ public class SpellCheckerImprovedDemo {
         BaiduPage baiduPage = new BaiduPage(firefoxDriver);
         spellingCheckerFirefoxPluginChecker.doCheck(baiduPage);
 
-        Collection<CheckedItem> statisticInfo = CheckedItemStatistic.getStatisticInfo();
+        Collection<CheckedItem> statisticInfo = CheckedItemStatistic.getStatisticInfo(SpellingCheck);
         Iterator<CheckedItem> iterator = statisticInfo.iterator();
         while(iterator.hasNext()){
             CheckedItem checkedItem = iterator.next();
