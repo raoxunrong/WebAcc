@@ -31,7 +31,7 @@ public abstract class PageSpellChecker implements PageChecker {
         CustomisedDictionary customisedDictionary = getCustomisedDictionary();
         List<String> filteredWords = new ArrayList<String>();
         for(String wrongWord : sourceWrongWords) {
-            if (!customisedDictionary.isWord(wrongWord)) {
+            if (!customisedDictionary.isWord(wrongWord.toLowerCase())) {
                 filteredWords.add(wrongWord);
             }
         }

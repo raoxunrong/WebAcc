@@ -26,11 +26,6 @@ public class FirefoxSpellCheckerImprovedChecker extends PageSpellChecker {
     }
 
     @Override
-    protected List<String> filterCustomisedWords(List<String> sourceWrongWords) {
-        return sourceWrongWords;
-    }
-
-    @Override
     protected CustomisedDictionary getCustomisedDictionary() {
         return customisedDictionary;
     }

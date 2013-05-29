@@ -1,6 +1,7 @@
+package org.raoxunrong.demo;
+
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.raoxunrong.check.CheckType;
 import org.raoxunrong.check.spellcheck.firefox.FirefoxSpellCheckerImprovedChecker;
 import org.raoxunrong.domain.item.CheckedItem;
 import org.raoxunrong.profile.FirefoxProfileHandle;

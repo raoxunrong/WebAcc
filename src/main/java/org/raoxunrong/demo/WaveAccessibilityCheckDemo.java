@@ -1,3 +1,5 @@
+package org.raoxunrong.demo;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +16,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import static org.raoxunrong.check.CheckType.AccessibilityCheck;
-import static org.raoxunrong.check.CheckType.SpellingCheck;
 
 public class WaveAccessibilityCheckDemo {
 
