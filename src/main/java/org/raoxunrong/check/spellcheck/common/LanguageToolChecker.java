@@ -1,6 +1,7 @@
 package org.raoxunrong.check.spellcheck.common;
 
 import org.languagetool.JLanguageTool;
+import org.languagetool.Language;
 import org.languagetool.language.English;
 import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
@@ -20,10 +21,10 @@ public class LanguageToolChecker extends PageSpellChecker {
     private JLanguageTool langTool;
     private CustomisedDictionary customisedDictionary;
 
-    public LanguageToolChecker(English english) throws IOException {
+    public LanguageToolChecker(Language language) throws IOException {
         this.customisedDictionary = new DefaultCustomisedDictionary();
-        this.langTool = new JLanguageTool(english);
-        disableNotSpellingRules();
+        this.langTool = new JLanguageTool(language);
+//        disableNotSpellingRules();
     }
 
     @Override
