@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.raoxunrong.check.PageChecker;
-import org.raoxunrong.domain.item.ListItem;
-import org.raoxunrong.domain.item.PlainTextItem;
+import org.raoxunrong.domain.item.CollectionItem;
+import org.raoxunrong.domain.item.ElementDescription;
 import org.raoxunrong.domain.page.CheckablePage;
 
 import java.util.ArrayList;
@@ -26,17 +26,12 @@ public class FirefoxWaveAccessibilityChecker implements PageChecker {
 
     private void handleAccessibilityInfo(CheckablePage page) {
         List<WebElement> elements = page.getWebDriver().findElements(By.xpath("//*[@class='wave4tip' and starts-with(@alt, 'ERROR:')]"));
-
-        List<String> checkedItemList = new ArrayList<String>();
+        List<ElementDescription> checkedItemList = new ArrayList<ElementDescription>();
         for (WebElement webElement : elements) {
-            StringBuffer accessibilityError = new StringBuffer();
-            accessibilityError.append(webElement.getAttribute("targetelement").trim()).append(": ");
-            accessibilityError.append(webElement.getAttribute("alt").trim());
-
-            checkedItemList.add(accessibilityError.toString());
+            checkedItemList.add(new ElementDescription(webElement.getAttribute("targetelement").trim(), webElement.getAttribute("alt").trim()));
         }
 
-        addCheckedItem(new ListItem(page.getPageName(), (checkedItemList.size() == 0), checkedItemList, AccessibilityCheck));
+        addCheckedItem(new CollectionItem(page.getPageName(), (checkedItemList.size() == 0), checkedItemList, AccessibilityCheck));
     }
 
     private void resetPage(CheckablePage page) {

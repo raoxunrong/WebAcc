@@ -10,10 +10,6 @@ public class CheckedItem<T> {
 
     private T additionalInfo;
 
-    public CheckType getCheckType() {
-        return checkType;
-    }
-
     private CheckType checkType;
 
     public CheckedItem(String itemName, boolean pass, T additionalInfo, CheckType checkType) {
@@ -33,6 +29,10 @@ public class CheckedItem<T> {
 
     public String getItemName() {
         return itemName;
+    }
+
+    public CheckType getCheckType() {
+        return checkType;
     }
 
     @Override
