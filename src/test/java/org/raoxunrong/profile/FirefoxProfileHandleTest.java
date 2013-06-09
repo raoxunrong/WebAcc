@@ -1,6 +1,7 @@
 package org.raoxunrong.profile;
 
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -36,6 +37,7 @@ public class FirefoxProfileHandleTest {
 
 
     @Test
+    @Ignore
     public void shouldInstance() throws IOException {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         FirefoxProfileHandle firefoxProfileHandle = new FirefoxProfileHandle();
