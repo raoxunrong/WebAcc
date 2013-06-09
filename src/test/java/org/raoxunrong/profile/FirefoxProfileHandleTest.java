@@ -35,16 +35,4 @@ public class FirefoxProfileHandleTest {
         verify(firefoxProfile).addExtension(eq(FirefoxProfileHandle.class), eq("/spell_checker_improved.xpi"));
     }
 
-
-    @Test
-    @Ignore
-    public void shouldInstance() throws IOException {
-        FirefoxProfile firefoxProfile = new FirefoxProfile();
-        FirefoxProfileHandle firefoxProfileHandle = new FirefoxProfileHandle();
-        firefoxProfile = firefoxProfileHandle.installWAVE(firefoxProfile);
-        firefoxProfile = firefoxProfileHandle.installSpellChecker(firefoxProfile);
-
-        FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxProfile);
-        firefoxDriver.get("http://baidu.com");
-    }
 }

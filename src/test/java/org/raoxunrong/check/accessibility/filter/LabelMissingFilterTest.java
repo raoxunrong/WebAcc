@@ -22,7 +22,7 @@ public class LabelMissingFilterTest extends AbstractHtmlFilterTest {
     }
 
     @Test
-    public void shouldFilterEmptyElements() throws IOException, URISyntaxException {
+    public void shouldFilterLabelMissingElements() throws IOException, URISyntaxException {
         StringBuffer elementBuffer = new StringBuffer();
         elementBuffer.append("<input/>").append("<input type='checkbox'/>").append("<input type='password'/>")
                 .append("<input type='radio'/>").append("<input type='text'/>").append("<input type=''/>");
@@ -33,5 +33,23 @@ public class LabelMissingFilterTest extends AbstractHtmlFilterTest {
 
         Collection<WebElement> filterElements = labelMissingFilter.filter(getCheckablePage());
         assertThat(filterElements.size(), is(6));
+    }
+
+    @Test
+    public void shouldAcceptInputWithLabelElements() throws IOException, URISyntaxException {
+        StringBuffer elementBuffer = new StringBuffer();
+        elementBuffer.append("<input id='1'/>").append("<label for='1'/>")
+                .append("<input type='checkbox' id='2'/>").append("<label for='2'/>")
+                .append("<input type='password' id='3'/>").append("<label for='3'/>")
+                .append("<input type='radio' id='4'/>").append("<label for='4'/>")
+                .append("<input type='text' id='5'/>").append("<label for='5'/>")
+                .append("<input type='' id='6'/>").append("<label for='6'/>");
+
+        setBodyResource(elementBuffer.toString());
+        writeHtmlResource();
+        openTestPage();
+
+        Collection<WebElement> filterElements = labelMissingFilter.filter(getCheckablePage());
+        assertThat(filterElements.size(), is(0));
     }
 }
