@@ -32,7 +32,7 @@ public class WaveAccessibilityCheckDemo {
         waveAccessibilityChecker.doCheck(baiduPage);
 
         WebElement inputBox = firefoxDriver.findElement(By.id("kw"));
-        inputBox.sendKeys("suncorp");
+        inputBox.sendKeys("ThoughtWorks");
         firefoxDriver.findElement(By.id("su")).submit();
 
         BaiduResultPage baiduResultPage = new BaiduResultPage(firefoxDriver);
