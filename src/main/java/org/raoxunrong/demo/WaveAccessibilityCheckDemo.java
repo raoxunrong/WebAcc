@@ -86,7 +86,7 @@ class BaiduResultPage implements  CheckablePage {
 
     @Override
     public String getPageId() {
-        return "out";
+        return "wrapper";
     }
 
     @Override
